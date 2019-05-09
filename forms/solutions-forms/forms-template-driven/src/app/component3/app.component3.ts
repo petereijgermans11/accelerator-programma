@@ -11,7 +11,7 @@ export class AppComponent3 implements OnInit {
 	}
 
 	ngOnInit() {
-		this.myLastName = 'Default Value (coming from component): Kassenaar';
+		this.myLastName = 'Default Value (coming from component): Eijgermans';
 	}
 
 }
