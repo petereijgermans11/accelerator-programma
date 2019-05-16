@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 5</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise 5;
+        // A part of this exercise is given business logic, but we need the Observable to complete.
+        // Add operators to make sure we handle any errors given by the Observable so it completes again.
+        const { from, of } = rxjs;
+        const { map , EMPTY, catchError} = rxjs.operators;
+
+        // This is business logic, you cannot change the map().
+        const obs = from([1, 2, 3]).pipe(
+            map(val => {
+                if (val >= 3) {
+                    throw new Error("No, the Observable does not agree with your ways.")
+                } else {
+                    return val;
+                }
+            }),
+            catchError(_ => of('errorrrrr!!'))
+        ).subscribe(
+            a => console.log(`📥 `, a),
+            (err) => { console.error(`⛔`, err); },
+            () => console.log(`👍`, 'Completed! Well done!')
+        );
+    </script>
+</body>
+
+</html>

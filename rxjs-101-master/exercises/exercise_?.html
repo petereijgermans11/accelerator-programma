@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise ?</title>
+</head>
+<body>
+    <h2 id="pageTitle">Page title</h2>
+    <strong>Change title</strong>
+    <input id="textInput" type="text">
+
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise ?;
+        // Use fromEvent() to listen for keystrokes in text input
+        // Update the page title when the text input changes
+
+        // Bonus: use map() and pipe() to get the value directly when subscribing
+        // Bonus: use debounceTime() for better performance
+
+        const pageTitleNode = document.getElementById('pageTitle')
+        const textInputNode = document.getElementById('textInput')
+
+        const { pipe, fromEvent } = rxjs
+        const { map, debounceTime, distinctUntilChanged } = rxjs.operators
+
+        const keyUpObservable = fromEvent(textInputNode, 'keyup').pipe(
+            map(e => e.target.value),
+            distinctUntilChanged(),
+            debounceTime(200)
+        )
+
+        keyUpObservable.subscribe(value => {
+            pageTitleNode.innerHTML = value
+        })
+    </script>
+</body>
+</html>

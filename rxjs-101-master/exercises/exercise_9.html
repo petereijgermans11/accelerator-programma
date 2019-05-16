@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>RxJS exercise 9</title>
+	</head>
+
+	<body>
+        <div id="counter"></div>
+        <button id="cancel">Cancel</button>
+		<script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+		<script>
+			// Exercise 9
+			// Managing your subscriptions is important.
+            // In this exercise we're going to optimize subscriptions.
+            //
+            // Refactor the code below so you only need one subscribe() and see how much you can optimize it.
+            // Hint: look up the `takeUntil` operator and see if you can `merge`.
+
+			const { timer, fromEvent } = rxjs;
+            const { map, pipe, tap } = rxjs.operators;
+
+            const counterEl = document.getElementById('counter')
+            const cancelButton = document.getElementById('cancel')
+
+            const onCancel = fromEvent(cancelButton, 'click')
+            const counter = timer(0, 1000).pipe(
+                map(num => num * 10),
+                tap(num => counterEl.innerText = num)
+            )
+
+            const counter$ = counter.subscribe(num => {
+                if (num > 100) {
+                    counter$.unsubscribe()
+                    cancel$.unsubscribe()
+                }
+            })
+
+            const cancel$ = onCancel.subscribe(() => {
+                counter$.unsubscribe()
+            })
+		</script>
+	</body>
+</html>

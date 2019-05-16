@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 4</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise 4;
+        // combining exercises 2 + 3;
+        // use filter() to let the observable only return string value (hint: use typeof x === 'string')
+        // use map() to transform each value to be uppercase (hint: use x.toUpperCase())
+
+        const { from, pipe } = rxjs;
+        const { filter, map } = rxjs.operators;
+
+        const observable = from([20, 'Twenty', 40, 'Fourty']).pipe(
+            filter(y => typeof y === 'string'),
+            map(y => y.toUpperCase())
+        )
+
+        observable.subscribe(value => {
+            console.log(value) // should log the values TWENTY, FOURTY
+        })
+    </script>
+</body>
+
+</html>

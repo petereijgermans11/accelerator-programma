@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 8</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script src="./pokemon.js"></script>
+    <script>
+        // Exercise 8;
+        // We have two observables, both containing separate parts of data that can be linked.
+        // Link the two observables to match the correct results.
+        // You can do either: Filter all Pokémon of a certain type, and gather their moves with them,
+        // Or filter a certain Pokémon ID and retrieve the correct moves.
+        // Hint; not all types have moves, and you only need (should have) 1 subscribe.
+        const { of, merge } = rxjs;
+        const { map, concatAll, mergeMap, filter, toArray, defaultIfEmpty } = rxjs.operators;
+
+        const pokemonObs = of(pokemon);
+        const typesObs = of(types);
+
+        const type = 'psychic';
+        const filtered = pokemonObs.pipe(
+            concatAll(),
+            filter(p => p.id === 50),
+            mergeMap(m => typesObs.pipe(
+                concatAll(),
+                filter(t => t.id === m.type),
+                defaultIfEmpty(Object.assign({}, m, { moves: [] })),
+                map(t => Object.assign({}, m, { moves: t.moves }))
+            )
+            )
+        ).subscribe(console.log);
+    </script>
+</body>
+
+</html>

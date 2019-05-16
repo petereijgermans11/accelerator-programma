@@ -1,0 +1,26 @@
+{
+  "name": "rxjs-101",
+  "version": "1.0.0",
+  "description": "## Todo > W = waiting for > X = done",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run reveal",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reveal": "reveal-md ./presentation/reveal.md -w",
+    "reveal-export": "reveal-md ./presentation/reveal.md --static docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-star/rxjs-101.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/code-star/rxjs-101/issues"
+  },
+  "homepage": "https://github.com/code-star/rxjs-101#readme",
+  "devDependencies": {
+    "reveal-md": "^3.0.4"
+  }
+}

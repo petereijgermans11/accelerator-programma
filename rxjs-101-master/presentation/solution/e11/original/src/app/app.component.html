@@ -1,0 +1,12 @@
+<hello name="{{ name }}"></hello>
+<p>
+  Start editing to see some magic happen :)
+</p>
+
+<button (click)="addItem({ name: 'new item' })">Add Item</button>
+<button (click)="refresh()">Refresh from Server</button>
+<div>
+  <pre>
+    {{ items$ | async | json }}
+  </pre>
+</div>

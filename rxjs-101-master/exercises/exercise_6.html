@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 6</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise 6;
+        // Part A:
+        // There are two things that are going wrong in this code. Can you see what they are?
+        // Adjust the code to fix those problems.
+        // Hint: Run the example first and check the console log.
+        //
+        // Part B:
+        // Rewrite this code so you don't need a Subject anymore.
+        // Hint: the `from` creator and the `map` operator could help here.
+
+        const { Subject } = rxjs;
+
+        const numbersArray = [0, 1, 2, 3, 4];
+        const numbersSubject = new Subject();
+
+        numbersSubject.subscribe(
+            next => {
+                console.log(next);
+            }, error => {
+                console.error(error);
+            }, () => {
+                console.warn('Subscription finished');
+            }
+        );
+
+        numbersArray.forEach(number => {
+            // we have some business logic over here that we want to keep
+            if (number === 3) {
+                numbersSubject.error('Number 3 is way too high!');
+            }
+
+            numbersSubject.next(number);
+        });
+
+        
+    </script>
+</body>
+
+</html>

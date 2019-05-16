@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 1</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise 1;
+        // Use range() to write your first Observable, and log its contents to your console
+        // The line underneath loads the `range` function from RxJS into your browser.
+        const { range } = rxjs;
+const rangeObs = range(1,3);
+
+rangeObs.subscribe(x => console.log(x));
+        // Start here, have fun!
+        
+    </script>
+</body>
+
+</html>

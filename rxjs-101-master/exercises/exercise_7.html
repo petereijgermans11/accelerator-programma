@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 7</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script>
+        // Exercise 7;
+        // We're attempting to figure out when the user drags on the screen. 
+        // We have done this in a way that is not really clean, next that it doesn't properly work.
+        // Can you improve our code and fix the bug?
+        //
+        // *Bonus* points if you can manage the subscription as well to unsubscribe after one drag (click down then mouseup);
+        // *More bonus* points if you can make the amount of times dragged before unsubscribe configurable. ;-)
+
+        const { Subject , merge} = rxjs;
+        const { } = rxjs.operators;
+
+        // const moveSubject = new Subject();
+        const downSubject = new Subject();
+        const upSubject = new Subject();
+
+        // Commented out; as we don't need it. But we could've used this as well!
+        // window.addEventListener('mousemove', (ev) => {
+        //     moveSubject.next(ev);
+        // });
+
+        window.addEventListener('mousedown', (ev) => {
+            downSubject.next(ev);
+        });
+
+        window.addEventListener('mouseup', (ev) =>{
+            upSubject.next(ev);
+        })
+
+        // const move$ = moveSubject.asObservable();
+        const down$ = downSubject.asObservable();
+        const up$ = upSubject.asObservable();
+
+        // down$.subscribe(down => {   // geneste subscribes --> merge it!!!
+        //     console.log('down clicked', down);
+        //     up$.subscribe(up => {
+        //         console.log('up clicked after down clicked', up);
+        //     })
+        // });
+        merge(down$, up$).subscribe(next => console.log(next));
+    </script>
+</body>
+
+</html>

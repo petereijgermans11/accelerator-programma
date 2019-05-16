@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RxJS exercise 10</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/rxjs@latest/bundles/rxjs.umd.min.js"></script>
+    <script src="./pokemon.js"></script>
+    <script>
+        // Exercise 10;
+        // We have two observables, both containing separate parts of data that can be linked.
+        // Link the two observables to match the correct results.
+        // You can do either: Filter all Pokémon of a certain type, and gather their moves with them,
+        // Or filter a certain Pokémon ID and retrieve the correct moves.
+        // Hint; not all types have moves, and you only need (should have) 1 subscribe.
+        const { of, merge } = rxjs;
+        const {  } = rxjs.operators;
+
+        const pokemonObs = of(pokemon);
+        const typesObs = of(types);
+    </script>
+</body>
+
+</html>
